@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music App</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<style>
+body {
+  margin: 0;
+  background: #0f0f0f;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+.header {
+  padding: 20px;
+  font-size: 22px;
+  font-weight: bold;
+}
+.track {
+  padding: 15px 20px;
+  border-bottom: 1px solid #1c1c1c;
+}
+.player {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #1a1a1a;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+}
+button {
+  font-size: 22px;
+  background: none;
+  border: none;
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<div class="header">Моя музыка</div>
+
+<div class="track" onclick="play()">▶ Трек 1</div>
+
+<div class="player">
+  <button onclick="toggle()">▶ / ⏸</button>
+</div>
+
+<audio id="audio"
+src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+</audio>
+
+<script>
+const audio = document.getElementById("audio");
+
+function play() {
+  audio.play();
+}
+
+function toggle() {
+  audio.paused ? audio.play() : audio.pause();
+}
+
+// Service Worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
+</script>
+
+</body>
+</html>
